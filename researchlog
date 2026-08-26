@@ -1,11 +1,28 @@
+Research Question: How can I implement a trading strategy to produce a statistically significant edge in trading live markets (NASDAQ and S&P 500)?
+
 8/25/26 - created a github
     - Just created a github to track versions and process
     - Right now I have implemented my dataset:
-        5 years of NQ OHLC data on a 1m interval and used AI to restructure it into a 5m interval and remove rows including spread and irrelevant values.
+        5 years of NQ OHLC data from DataBento on a 1m interval and used AI to restructure it into a 5m interval and remove rows including spread and irrelevant values.
     - Filtered out data that may be corrupt
     - Basic logic for 5m and 15m ORB strategies
     - Plot the results over time
     - Currently tracking win-rate and total percent increase
+
+
+    Current hypothesis:
+    Which ORB strategy will beat out the other?
+
+    TP_ratio:2
+    close_gap:0
+    yields the best results
+    15 Minute Winrate  48.70183110139382
+    15 Minute Total percent increase:  231.544
+
+    Results are similar enough for the difference to be negligible
+
+    Current Alterations:
+        - Closing gap size above/below the ORb high/low to filter out small breakouts
 
     Future:
     - Implement stat tracking for statistics such as 
@@ -18,3 +35,5 @@
         - Annual/monthly returns
         - Number of trades per year
         - Long vs short performance
+    - Change stop-size and TP logic
+        
