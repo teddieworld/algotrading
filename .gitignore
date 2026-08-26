@@ -1,0 +1,7 @@
+.venv/
+__pycache__/
+*.pyc
+.DS_Store
+DBNQ5M5Y.csv
+BT_MACross.ipynb
+test.py

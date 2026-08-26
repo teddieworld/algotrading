@@ -1,0 +1,20 @@
+8/25/26 - created a github
+    - Just created a github to track versions and process
+    - Right now I have implemented my dataset:
+        5 years of NQ OHLC data on a 1m interval and used AI to restructure it into a 5m interval and remove rows including spread and irrelevant values.
+    - Filtered out data that may be corrupt
+    - Basic logic for 5m and 15m ORB strategies
+    - Plot the results over time
+    - Currently tracking win-rate and total percent increase
+
+    Future:
+    - Implement stat tracking for statistics such as 
+        - Expectancy
+        - Average R
+        - Profit factor
+        - Sharpe ratio
+        - Maximum drawdown
+        - Time in trade
+        - Annual/monthly returns
+        - Number of trades per year
+        - Long vs short performance
