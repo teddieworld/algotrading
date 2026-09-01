@@ -1,2 +1,5 @@
-Experiment,Date,Alteration,15mWin_Rate,15m%Growth,R,Conclusion
-V1.1, 8/25/26, Base, 48.70%, 231.54%, N/A, Base metrics
+Experiment,Date,Alteration,Trades_taken, 15mWin_Rate,15mLoss_Rate,15m%Growth,R,Profit_Factor,MaxDD,Conclusion
+V1.1, 8/25/26, Base, 3659, 48.70%, 51.30%, 115.772%, 7.91, 1.283, 5.5%, Base metrics
+V1.2, 9/1/26, SL to opposing ORB, N/A, 41.78%, 58.218%, 35.83%, 5.274, 1.059, 19.07%, Worse
+V1.3, 9/1/26, TP = 1/2 * ORB, N/A, 71.8%, 28.2%, -829.52%, 6, 0.184, 827.9%, Horrible
+V1.4, 9/1/26, 1 Trade per day, N/A, 51.06%, 48.94%, 15.99%, 3.256, 1.189, 3.51%, Positive but bad
