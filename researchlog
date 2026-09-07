@@ -63,4 +63,276 @@ Research Question: How can I implement a trading strategy to produce a statistic
 
     Future:
     - Continue to find improvements for the strategy
+
+9/3/26:
+    - Tested new criteries: only take longs and only when price is in an uptrend:
+    Longs only and uptrend performed worse than only trading when price is an uptrend
+
+    Using SMA:
+    15 Minute Winrate  49.739
+    15 Minute Lossrate 50.261
+    Trades taken:  2107
+    15 Minute Total percent increase:  76.64999999999999
+    Average win 70.57729007633588
+    Average loss -51.74929178470255
+    Expectancy R:  9.095
+    Profit Factor:  1.35
+    Worst Drawdown:  -5.0839238678819
+
+    Using EMA:
+    15 Minute Winrate  49.952
+    15 Minute Lossrate 50.048
+    Trades taken:  2102
+    15 Minute Total percent increase:  68.42399999999999
+    Average win 67.31476190476191
+    Average loss -50.926330798479086
+    Expectancy R:  8.138
+    Profit Factor:  1.319
+    Worst Drawdown:  -4.314516599228051
+
+    Results are very similar but fail to top the baseline
+
+    Total percent increase, Average win, Average loss, Expectancy, and worst drawdown are variable depending on contract_size so those will not be paid as much attention.
+
+
+    Testing day of week:
+
+    Monday:
+    15 Minute Winrate  47.899
+    15 Minute Lossrate 52.101
+    Trades taken:  714
+    15 Minute Total percent increase:  22.176000000000002
+    Average win 65.72514619883042
+    Average loss -45.52150537634409
+    Expectancy R:  7.765
+    Profit Factor:  1.327
+    Worst Drawdown:  -4.725894425441435
+
+    Tuesday:
+    15 Minute Winrate  50.921
+    15 Minute Lossrate 49.079
+    Trades taken:  760
+    15 Minute Total percent increase:  30.072
+    Average win 74.32428940568475
+    Average loss -56.95844504021448
+    Expectancy R:  9.892
+    Profit Factor:  1.354
+    Worst Drawdown:  -5.25915883255613
+
+    Wednesday:
+    15 Minute Winrate  47.513
+    15 Minute Lossrate 52.487
+    Trades taken:  764
+    15 Minute Total percent increase:  10.104000000000001
+    Average win 65.78374655647383
+    Average loss -53.250623441396506
+    Expectancy R:  3.306
+    Profit Factor:  1.118
+    Worst Drawdown:  -7.332802547770701
+
+    Thursday:
+    15 Minute Winrate  49.587
+    15 Minute Lossrate 50.413
+    Trades taken:  726
+    15 Minute Total percent increase:  37.688
+    Average win 87.89583333333333
+    Average loss -60.71174863387978
+    Expectancy R:  12.978
+    Profit Factor:  1.424
+    Worst Drawdown:  -4.556849200601638
+
+    Friday:
+    15 Minute Winrate  47.278
+    15 Minute Lossrate 52.722
+    Trades taken:  698
+    15 Minute Total percent increase:  13.07
+    Average win 74.43939393939394
+    Average loss -57.87364130434783
+    Expectancy R:  4.681
+    Profit Factor:  1.153
+    Worst Drawdown:  -4.3188400829491504
+
+    No days of the week product negative results so removing any day of the week would affect results negatively. However, Wednesdays do seem to perform the worst but still produce positive results overall.
+
+    Testing each month:
+
+    Pre-test: I don't believe there will be any pattern found through individual months of the year but it is worth testing out
+
+    January:
+    15 Minute Winrate  48.649
+    15 Minute Lossrate 51.351
+    Trades taken:  333
+    15 Minute Total percent increase:  11.936
+    Average win 72.57407407407408
+    Average loss -51.30409356725146
+    Expectancy R:  8.961
+    Profit Factor:  1.34
+    Worst Drawdown:  -8.055199569101614
+
+    February:
+    15 Minute Winrate  48.378
+    15 Minute Lossrate 51.622
+    Trades taken:  339
+    15 Minute Total percent increase:  12.842
+    Average win 71.72256097560975
+    Average loss -48.86857142857143
+    Expectancy R:  9.471
+    Profit Factor:  1.375
+    Worst Drawdown:  -5.739862035966346
+
+    March:
+    15 Minute Winrate  45.981
+    15 Minute Lossrate 54.019
+    Trades taken:  311
+    15 Minute Total percent increase:  4.556
+    Average win 80.02097902097903
+    Average loss -61.333333333333336
+    Expectancy R:  3.662
+    Profit Factor:  1.111
+    Worst Drawdown:  -3.9925945319220557
+
+    April:
+    15 Minute Winrate  56.522
+    15 Minute Lossrate 43.478
+    Trades taken:  253
+    15 Minute Total percent increase:  20.946
+    Average win 81.33216783216783
+    Average loss -58.127272727272725
+    Expectancy R:  20.698
+    Profit Factor:  1.819
+    Worst Drawdown:  -1.7833070763833625
+
+    May:
+    15 Minute Winrate  45.752
+    15 Minute Lossrate 54.248
+    Trades taken:  306
+    15 Minute Total percent increase:  8.198
+    Average win 77.225
+    Average loss -52.78313253012048
+    Expectancy R:  6.698
+    Profit Factor:  1.234
+    Worst Drawdown:  -2.4034615664315324
+
+    June:
+    15 Minute Winrate  44.223
+    15 Minute Lossrate 55.777
+    Trades taken:  251
+    15 Minute Total percent increase:  -0.772
+    Average win 74.33783783783784
+    Average loss -60.31785714285714
+    Expectancy R:  -0.769
+    Profit Factor:  0.977
+    Worst Drawdown:  -5.895146079525771
+
+    July:
+    15 Minute Winrate  48.276
+    15 Minute Lossrate 51.724
+    Trades taken:  290
+    15 Minute Total percent increase:  10.258000000000001
+    Average win 88.22857142857143
+    Average loss -65.25
+    Expectancy R:  8.843
+    Profit Factor:  1.262
+    Worst Drawdown:  -4.840073878445791
+
+    August:
+    15 Minute Winrate  53.722
+    15 Minute Lossrate 46.278
+    Trades taken:  309
+    15 Minute Total percent increase:  19.664
+    Average win 82.79518072289157
+    Average loss -61.73426573426573
+    Expectancy R:  15.909
+    Profit Factor:  1.557
+    Worst Drawdown:  -2.6899654784531246
+
+    September:
+    15 Minute Winrate  46.382
+    15 Minute Lossrate 53.618
+    Trades taken:  304
+    15 Minute Total percent increase:  0.234
+    Average win 55.86879432624114
+    Average loss -47.969325153374236
+    Expectancy R:  0.192
+    Profit Factor:  1.007
+    Worst Drawdown:  -4.276518655565834
+
+    October:
+    15 Minute Winrate  46.545
+    15 Minute Lossrate 53.455
+    Trades taken:  275
+    15 Minute Total percent increase:  8.658000000000001
+    Average win 78.2109375
+    Average loss -53.37755102040816
+    Expectancy R:  7.871
+    Profit Factor:  1.276
+    Worst Drawdown:  -3.2999305839844792
+
+    November:
+    15 Minute Winrate  49.167
+    15 Minute Lossrate 50.833
+    Trades taken:  360
+    15 Minute Total percent increase:  10.552
+    Average win 64.64689265536722
+    Average loss -48.112021857923494
+    Expectancy R:  7.328
+    Profit Factor:  1.3
+    Worst Drawdown:  -2.8216513967736496
+
+    December:
+    15 Minute Winrate  50.915
+    15 Minute Lossrate 49.085
+    Trades taken:  328
+    15 Minute Total percent increase:  8.7
+    Average win 61.3502994011976
+    Average loss -50.12732919254658
+    Expectancy R:  6.631
+    Profit Factor:  1.27
+    Worst Drawdown:  -4.797369356558834
+
+    Conclusion: Very surpringly but June performed negatively and September basically performed negatively as well. Why? After a quick google search, September historically performs horribly for the market and June could be due to the summer beginning and shifting market conditions
+
+    Now I want to test what happens if I remove June and September from the backtest altogether
+
+    No trades in June:
+    15 Minute Winrate  49.032
+    15 Minute Lossrate 50.968
+    Trades taken:  3408
+    15 Minute Total percent increase:  116.544
+    Average win 73.65469778575704
+    Average loss -54.08232584916523
+    Expectancy R:  8.549
+    Profit Factor:  1.31
+    Worst Drawdown:  -5.
+    
+    Removing June altogether actually improves the results across the whole of the backtest which is very very surprising
+
+    No Trades in September
+    15 Minute Winrate  48.912
+    15 Minute Lossrate 51.088
+    Trades taken:  3355
+    15 Minute Total percent increase:  115.53800000000001
+    Average win 75.22912858013406
+    Average loss -55.17298716452742
+    Expectancy R:  8.609
+    Profit Factor:  1.305
+    Worst Drawdown:  -5.622952919434228
+
+    No Trades in June and September
+    15 Minute Winrate  48.702
+    15 Minute Lossrate 51.298
+    Trades taken:  3659
+    15 Minute Total percent increase:  115.772
+    Average win 73.69725028058362
+    Average loss -54.54741608950453
+    Expectancy R:  7.91
+    Profit Factor:  1.283
+    Worst Drawdown:  -5.554752178156972
+
+    Conclusion: June performs very surprisingly poorly overall and removing it altogether improves results and finds us a new top version
+    
+
+
+
+
         
