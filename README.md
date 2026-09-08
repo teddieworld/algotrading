@@ -15,19 +15,11 @@ I'll be collecting data such as
   - Expectancy
   - Average R
   - Profit factor
-  - Sharpe ratio
   - Maximum drawdown
-  - Time in trade
-  - Annual/monthly returns
   - Number of trades per year
-  - Long vs short performance
 to make adjustments to the strategy that produces the best results
 
-In the future: looking to add more advanced statistical data
-
-
 AI USE: AI is used as a tool for me for the following purpose:
-
  - Guidance for code logic after I've tried to figure it out but couldn't
  - Restructuring large datasets to be compatible for my code
  - Advising me on how to make my project stand out such as the creation of a github, research log, experiment log, etc.
