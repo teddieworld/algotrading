@@ -8,10 +8,13 @@ Research Question: How can I implement a trading strategy to produce a statistic
 
 Strategy: The strategy I have chosen to implement is the "15M ORB Strategy". In it's simplest form, we wait for the 15M candle of the New York session open (9:30 AM EST) on NASDAQ or S&P 500 Futures and use the high and low of that candle as our range. Once a 5M candle closes above or below that range, a trade is taken.
 
+The statistics will be taken trading only 1 contract on MNQ futures, which has a signficant impact on %Increase as the futures are highly leveraged.
+
 I'll be collecting data such as 
   - Total trades
   - Win rate
   - Average win/loss
+  - Total % Increase
   - Expectancy
   - Average R
   - Profit factor

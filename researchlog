@@ -330,9 +330,191 @@ Research Question: How can I implement a trading strategy to produce a statistic
     Worst Drawdown:  -5.554752178156972
 
     Conclusion: June performs very surprisingly poorly overall and removing it altogether improves results and finds us a new top version
+
+9/8/26
+    - I want to test a VWAP filter but need to restructure the dataset again to add the volume column back in
+    - Before I do that, I will test a range filter, changing whether trades are taken depending on the range of the ORB
+
+    np.float64(69.93508923431203) is the average range of trades that are lost, so I will test this first
+
+    ORB_Range < 70
+    15 Minute Winrate  49.777
+    15 Minute Lossrate 50.223
+    Trades taken:  2015
+    15 Minute Total percent increase:  70.41199999999999
+    Average win 63.21784646061815
+    Average loss -45.26136363636363
+    Expectancy R:  8.736
+    Profit Factor:  1.384
+    Worst Drawdown:  -4.593417576925822
+
+    ORB_Range > 70
+    15 Minute Winrate  48.055
+    15 Minute Lossrate 51.945
+    Trades taken:  1388
+    15 Minute Total percent increase:  46.666000000000004
+    Average win 89.17916041979011
+    Average loss -66.31900138696255
+    Expectancy R:  8.405
+    Profit Factor:  1.244
+    Worst Drawdown:  -4.449968924798011
+
+    ORB_Range > 10
+    15 Minute Winrate  48.88
+    15 Minute Lossrate 51.12
+    Trades taken:  3347
+    15 Minute Total percent increase:  115.564
+    Average win 74.53789731051344
+    Average loss -54.385154880187024
+    Expectancy R:  8.632
+    Profit Factor:  1.31
+    Worst Drawdown:  -6.0899653979238755
+    - Very similar to top results, suggests a ORB size filter is redundant
+
+    ORB_Range > 20
+    15 Minute Winrate  49.044
+    15 Minute Lossrate 50.956
+    Trades taken:  2981
+    15 Minute Total percent increase:  108.11999999999999
+    Average win 77.50273597811217
+    Average loss -56.79986833443055
+    Expectancy R:  9.067
+    Profit Factor:  1.313
+    Worst Drawdown:  -5.399575864131519
+
+    ORB_Range > 30
+    15 Minute Winrate  48.437
+    15 Minute Lossrate 51.563
+    Trades taken:  2655
+    15 Minute Total percent increase:  82.08800000000001
+    Average win 78.51749611197512
+    Average loss -58.76661796932067
+    Expectancy R:  7.73
+    Profit Factor:  1.255
+    Worst Drawdown:  -4.719315286916042
+
+    Results drop as the filter increases, I will test it from the top end now
+
+    ORB_Range < 300
+    15 Minute Winrate  49.015
+    15 Minute Lossrate 50.985
+    Trades taken:  3401
+    15 Minute Total percent increase:  116.288
+    Average win 73.40251949610078
+    Average loss -53.800461361014996
+    Expectancy R:  8.548
+    Profit Factor:  1.312
+    Worst Drawdown:  -5.554752178156972
+
+    ORB_Range < 250
+    15 Minute Winrate  49.056
+    15 Minute Lossrate 50.944
+    Trades taken:  3390
+    15 Minute Total percent increase:  118.09400000000001
+    Average win 73.42423331328924
+    Average loss -53.60799073537927
+    Expectancy R:  8.709
+    Profit Factor:  1.319
+    Worst Drawdown:  -5.554752178156972    
+
+    ORB_Range < 275
+    15 Minute Winrate  49.029
+    15 Minute Lossrate 50.971
+    Trades taken:  3398
+    15 Minute Total percent increase:  116.78999999999999
+    Average win 73.36914765906363
+    Average loss -53.715646651270205
+    Expectancy R:  8.593
+    Profit Factor:  1.314
+    Worst Drawdown:  -5.554752178156972
+
+    ORB_Range < 225
+    15 Minute Winrate  48.992
+    15 Minute Lossrate 51.008
+    Trades taken:  3374
+    15 Minute Total percent increase:  114.744
+    Average win 72.92952208106473
+    Average loss -53.379721092388145
+    Expectancy R:  8.502
+    Profit Factor:  1.312
+    Worst Drawdown:  -5.554752178156972
+
+    So the ORB_Range < 250 very slightly improves results, but it is overall negligible. I have yet to find an improvement that improves results significantly so I will continue searching
+
+    Perhaps the most successful version of the 15m ORB is simply the most basic form but I will keep testing
+
+    Next, I think I will test a time of day filter; only taking trades between certian intervals (9:30 - 10:00, 10:00 - 10:30, etc.) Currently, trades can only be taken up to 11:00 AM so I will try extending it
+
+    Trades can be taken until 12:00 PM EST:
+    15 Minute Winrate  47.663
+    15 Minute Lossrate 52.337
+    Trades taken:  4985
+    15 Minute Total percent increase:  123.726
+    Average win 73.85753367003367
+    Average loss -55.40590264469145
+    Expectancy R:  6.205
+    Profit Factor:  1.214
+    Worst Drawdown:  -5.239272308758713
+
+    Very significant increase in percent increase , but winrate takes a dip and profit factor and trades taken increases a lot but I don't think it's a positive increase
+
+    Trades can be taken until 11:30 AM EST:
+    15 Minute Winrate  48.169
+    15 Minute Lossrate 51.831
+    Trades taken:  4287
+    15 Minute Total percent increase:  127.058
+    Average win 75.17239709443099
+    Average loss -55.565481548154814
+    Expectancy R:  7.409
+    Profit Factor:  1.257
+    Worst Drawdown:  -6.990691013247405
+
+    Trades can be taken until 11:15 AM EST:
+    15 Minute Winrate  48.674
+    15 Minute Lossrate 51.326
+    Trades taken:  3883
+    15 Minute Total percent increase:  126.30799999999999
+    Average win 74.44179894179894
+    Average loss -54.75062719518314
+    Expectancy R:  8.132
+    Profit Factor:  1.289
+    Worst Drawdown:  -6.483479253223017
+
+    Trades can be taken until and AT 11:00 AM EST:
+    15 Minute Winrate  48.75
+    15 Minute Lossrate 51.25
+    Trades taken:  3559
+    15 Minute Total percent increase:  121.78800000000001
+    Average win 73.49250720461094
+    Average loss -53.2140899122807
+    Expectancy R:  8.555
+    Profit Factor:  1.314
+    Worst Drawdown:  -6.32394570661247
+
+    Trades can be taken until 10:45 AM EST:
+    15 Minute Winrate  49.404
+    15 Minute Lossrate 50.596
+    Trades taken:  2854
+    15 Minute Total percent increase:  90.74
+    Average win 68.65070921985816
+    Average loss -51.324445983379505
+    Expectancy R:  7.948
+    Profit Factor:  1.306
+    Worst Drawdown:  -3.6439013746454285
+
+    Overall, I think taking trades until 11:15 AM EST produces the best results across % increase as well as expectancy and profit factor, making a new top regime
+
+    Played around with TP Ratio = 1
+    15 Minute Winrate  63.349
+    15 Minute Lossrate 36.651
+    Trades taken:  4330
+    15 Minute Total percent increase:  115.252
+    Average win 48.63598250091141
+    Average loss -65.90768746061752
+    Expectancy R:  6.654
+    Profit Factor:  1.275
+    Worst Drawdown:  -5.624061265738285
+
+    The win rate jumps very significantly without the total returns dropping that much but I am satisfied with the roguhly 50% winrate and extra 10% return. It does also allow a greater number of trades to be taken due to the shorter trade time. If I were testing a trading strategy that I would be using manually, then this would be a better result but because I am building a trading robot, I think the greater returns is a better regime to use.
+
     
-
-
-
-
-        
