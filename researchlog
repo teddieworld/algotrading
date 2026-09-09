@@ -519,10 +519,213 @@ Research Question: How can I implement a trading strategy to produce a statistic
 
     Just used AI to restructrue my dataset to include the volume column and the risk free rate in order to add a sharpre ratio calculation. Unfortunately, the restructuring changed the results of my data which is likely due to an AI error out of my control, but the different is very small.
 
-    Also added the sharpre ratio calculation
+    Also added the sharpre ratio calculation; it's not something I will heavily take into consideration for the 'best' strategy but it's something that should be included
 
     Future:
     - test volume filters
     - add costs/slippage
 
+9/9/26
+    Today I will implement volume filters. Out of the trades_15m dataframe, an average of 8302.765015806111 volume was for winning trades and 8747.5035 for losing trades on the 5m candles that broke out the range.
+
+    Volume > 6000
+    15 Minute Winrate  47.969
+    15 Minute Lossrate 52.031
+    Trades taken:  2831
+    15 Minute Total percent increase:  130.072
+    Average win 93.81148748159058
+    Average loss -64.41140529531569
+    Expectancy R:  11.486
+    Profit Factor:  1.343
+    Worst Drawdown:  -6.382021629524114
+    Sharpe:  1.644720528571633
+    
+    The volume filters seem to have a strong effect on the results. Significantly lower volume in trades taken, but overall stronger increase
+
+    Volume > 5000
+    15 Minute Winrate  48.264
+    15 Minute Lossrate 51.736
+    Trades taken:  3025
+    15 Minute Total percent increase:  135.922
+    Average win 91.00205479452055
+    Average loss -63.18370607028754
+    Expectancy R:  11.233
+    Profit Factor:  1.344
+    Worst Drawdown:  -6.090078209425426
+    Sharpe:  1.717480786428229
+
+    Results improve slightly but it looks like the volume filter plays a strong role in the backtest
+
+    Volume > 4000
+    15 Minute Winrate  47.74
+    15 Minute Lossrate 52.26
+    Trades taken:  3186
+    15 Minute Total percent increase:  119.92
+    Average win 87.67028270874425
+    Average loss -62.08198198198198
+    Expectancy R:  9.41
+    Profit Factor:  1.29
+    Worst Drawdown:  -7.016398200551444
+    Sharpe:  1.5189339449613932
+    
+    It looks like the threshold is around 4000-5000
+
+    Volume > 4500
+    5 Minute Winrate  48.066
+    15 Minute Lossrate 51.934
+    Trades taken:  3102
+    15 Minute Total percent increase:  127.362
+    Average win 89.22434607645876
+    Average loss -62.81378026070764
+    Expectancy R:  10.265
+    Profit Factor:  1.315
+    Worst Drawdown:  -6.583371612310519
+    Sharpe:  1.606262808661287
+
+    Volume > 5500
+    15 Minute Winrate  48.011
+    15 Minute Lossrate 51.989
+    Trades taken:  2941
+    15 Minute Total percent increase:  131.53
+    Average win 92.37889518413597
+    Average loss -63.804120340091565
+    Expectancy R:  11.181
+    Profit Factor:  1.337
+    Worst Drawdown:  -6.3328807632934705
+    Sharpe:  1.653288910557449
+    
+    Volume > 5250
+    15 Minute Winrate  48.054
+    15 Minute Lossrate 51.946
+    Trades taken:  2980
+    15 Minute Total percent increase:  130.66199999999998
+    Average win 91.45495810055866
+    Average loss -63.5
+    Expectancy R:  10.962
+    Profit Factor:  1.332
+    Worst Drawdown:  -6.104490277829023
+    Sharpe:  1.6515690800094391
+
+    5000 seems to be the sweet spot. 
+
+    Will there be a similar effect with a volume restriction filter?
+
+    Volume < 30000
+    15 Minute Winrate  48.214
+    15 Minute Lossrate 51.786
+    Trades taken:  3024
+    15 Minute Total percent increase:  133.93
+    Average win 90.93278463648834
+    Average loss -63.280651340996165
+    Expectancy R:  11.072
+    Profit Factor:  1.338
+    Worst Drawdown:  -6.090078209425426
+    Sharpe:  1.6919039510510836
+
+    Volume < 25000
+    15 Minute Winrate  48.163
+    15 Minute Lossrate 51.837
+    Trades taken:  3021
+    15 Minute Total percent increase:  132.594
+    Average win 90.7
+    Average loss -63.10344827586207
+    Expectancy R:  10.973
+    Profit Factor:  1.335
+    Worst Drawdown:  -6.724911538321235
+    Sharpe:  1.6902942723130854
+
+    Volume < 20000
+    15 Minute Winrate  48.208
+    15 Minute Lossrate 51.792
+    Trades taken:  2985
+    15 Minute Total percent increase:  126.55199999999999
+    Average win 90.01667824878388
+    Average loss -63.32212160413972
+    Expectancy R:  10.599
+    Profit Factor:  1.323
+    Worst Drawdown:  -6.98764615045224
+    Sharpe:  1.6117334515081885
+
+    It looks like higher volume increases the success of the strategy. 
+
+    Now I will be adding costs/slippage. On NinjaTrader (the broker I use), their commission on each entry and exit is $0.50. I will test in simulated enviornments so slippage is not included because it is variable and unpredictable.
+
+    15 Minute Winrate  48.264
+    15 Minute Lossrate 51.736
+    Trades taken:  3025
+    15 Minute Total percent increase:  123.822
+    Average win 91.31549687282835
+    Average loss -64.18370607028754
+    Expectancy R:  10.867
+    Profit Factor:  1.308
+    Worst Drawdown:  -6.480882597527396
+    Sharpe:  1.5361927618129947
+
+    Accounting for fees hurts the results in total but it doesn't affect the prior backtests because they would all be affected the same so the current result is still the best one.
+
+    I decided to play around with the stop loss placement and found some interesting results, when the stop loss is the ORB level that was broken out divided by x, the results improve
+
+    x = 750
+    15 Minute Winrate  48.162
+    15 Minute Lossrate 51.838
+    Trades taken:  3019
+    15 Minute Total percent increase:  126.3166639999995
+    Average win 90.72246309032555
+    Average loss -64.10945388711404
+    Expectancy R:  10.46
+    Profit Factor:  1.315
+    Worst Drawdown:  -6.472746508711897
+    Sharpe:  1.5692061546668166
+
+    x = 500
+    15 Minute Winrate  48.045
+    15 Minute Lossrate 51.955
+    Trades taken:  3018
+    15 Minute Total percent increase:  127.46527200000027
+    Average win 91.01152413793105
+    Average loss -63.839535714285745
+    Expectancy R:  10.559
+    Profit Factor:  1.318
+    Worst Drawdown:  -6.478377121139562
+    Sharpe:  1.5798926694602833
+
+    x = 600
+    15 Minute Winrate  48.095
+    15 Minute Lossrate 51.905
+    Trades taken:  3019
+    15 Minute Total percent increase:  128.08544333333302
+    Average win 90.9049735996326
+    Average loss -63.79876249734093
+    Expectancy R:  10.607
+    Profit Factor:  1.32
+    Worst Drawdown:  -6.470713799062561
+    Sharpe:  1.5890694584529663
+
+    x = 650
+    15 Minute Winrate  48.129
+    15 Minute Lossrate 51.871
+    Trades taken:  3019
+    15 Minute Total percent increase:  128.29152307692192
+    Average win 90.83966011964625
+    Average loss -63.80405196974167
+    Expectancy R:  10.624
+    Profit Factor:  1.321
+    Worst Drawdown:  -6.47149554837038
+    Sharpe:  1.5909554215886947
+
+    x = 700
+    15 Minute Winrate  48.162
+    15 Minute Lossrate 51.838
+    Trades taken:  3019
+    15 Minute Total percent increase:  128.24637714285626
+    Average win 90.74930831204541
+    Average loss -63.826134185303495
+    Expectancy R:  10.62
+    Profit Factor:  1.321
+    Worst Drawdown:  -6.472165680982407
+    Sharpe:  1.5905519934709826
+
+    The divider being 650 looks to yield the best results. A 5% increase with an improvement to sharpe, profit factor, and expectancy, but slight decrease to win rate.
+
+    I want to further test trend filters because I did very bare testing with those.
     
