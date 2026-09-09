@@ -20,6 +20,7 @@ I'll be collecting data such as
   - Profit factor
   - Maximum drawdown
   - Number of trades per year
+  - Shapre Ratio
 to make adjustments to the strategy that produces the best results
 
 AI USE: AI is used as a tool for me for the following purpose:
