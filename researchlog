@@ -729,3 +729,146 @@ Research Question: How can I implement a trading strategy to produce a statistic
 
     I want to further test trend filters because I did very bare testing with those.
     
+9/10/26
+    Today I will experiment with moving averages to indicate the overall trend of the market.
+
+    Price > 200SMA or Price < 200SMA for longs and shorts
+    15 Minute Winrate  47.472
+    15 Minute Lossrate 52.528
+    Trades taken:  2037
+    15 Minute Total percent increase:  84.27435076922988
+    Average win 98.24258372444498
+    Average loss -69.09531847591671
+    Expectancy R:  10.343
+    Profit Factor:  1.285
+    Worst Drawdown:  -6.524742513025951
+    Sharpe:  1.1461779701928645
+
+    Results are still positive but dip from the best iteration.
+
+    Maybe with longs only?
+    15 Minute Winrate  48.942
+    15 Minute Lossrate 51.058
+    Trades taken:  1087
+    15 Minute Total percent increase:  41.8142123076916
+    Average win 82.64765182186211
+    Average loss -60.38738322938333
+    Expectancy R:  9.617
+    Profit Factor:  1.312
+    Worst Drawdown:  -4.133392143344632
+    Sharpe:  0.61855190035929
+
+    Results did not improve. Testing more intermediate trend with the 50 SMA.
+
+    15 Minute Winrate  46.887
+    15 Minute Lossrate 53.113
+    Trades taken:  2329
+    15 Minute Total percent increase:  101.71535076923033
+    Average win 100.96598478444628
+    Average loss -68.57398358311056
+    Expectancy R:  10.918
+    Profit Factor:  1.3
+    Worst Drawdown:  -6.8919682046303095
+    Sharpe:  1.3072856115176863
+
+    Results definitely improve but I do not like that winrate. Lets try longs only again.
+
+    15 Minute Winrate  48.238
+    15 Minute Lossrate 51.762
+    Trades taken:  1192
+    15 Minute Total percent increase:  44.27656923076862
+    Average win 86.40191571906331
+    Average loss -62.58016082782701
+    Expectancy R:  9.286
+    Profit Factor:  1.287
+    Worst Drawdown:  -5.281348367708809
+    Sharpe:  0.6361348866641389
+
+    It looks like longs only is never better than both longs and shorts.
+
+    Now lets try a 20 EMA for an even shorter term trend
+    15 Minute Winrate  47.13
+    15 Minute Lossrate 52.87
+    Trades taken:  2631
+    15 Minute Total percent increase:  109.60090153846134
+    Average win 97.48084367245656
+    Average loss -67.20059005695963
+    Expectancy R:  10.414
+    Profit Factor:  1.293
+    Worst Drawdown:  -8.30104035911284
+    Sharpe:  1.3780637866319636
+
+    Results improve a little but I think it's safe to assume that trend filters do not increase results.
+    Before I move on, I want to test a VWAP filter
+
+
+    Moving on, I want to test volatility filters using ATR
+
+    ORB_Range < 5 * 14ATR
+    15 Minute Winrate  48.178
+    15 Minute Lossrate 51.822
+    Trades taken:  2991
+    15 Minute Total percent increase:  130.0496492307682
+    Average win 91.3524176586771
+    Average loss -63.95253002481395
+    Expectancy R:  10.87
+    Profit Factor:  1.328
+    Worst Drawdown:  -6.008818809473523
+    Sharpe:  1.6189726794586339
+
+    ORB_Range < 4 * 14ATR
+    15 Minute Winrate  48.127
+    15 Minute Lossrate 51.873
+    Trades taken:  2909
+    15 Minute Total percent increase:  125.42835692307588
+    Average win 92.1401879120878
+    Average loss -64.70455523270638
+    Expectancy R:  10.779
+    Profit Factor:  1.321
+    Worst Drawdown:  -6.06373346189656
+    Sharpe:  1.5594309180009394
+
+    ORB_Range < 3 * 14ATR
+    15 Minute Winrate  47.773
+    15 Minute Lossrate 52.227
+    Trades taken:  2560
+    15 Minute Total percent increase:  112.05583384615304
+    Average win 94.21823133530404
+    Average loss -65.23181635118816
+    Expectancy R:  10.943
+    Profit Factor:  1.321
+    Worst Drawdown:  -5.695935439789909
+    Sharpe:  1.415162827522262
+
+    Ok it looks like having a more lenient volatility filter produces better results. Maybe more volatile days produce better results.
+
+    ORB_Range < 6 * 14ATR
+    15 Minute Winrate  48.103
+    15 Minute Lossrate 51.897
+    Trades taken:  3004
+    15 Minute Total percent increase:  128.59260923076818
+    Average win 91.14924673941965
+    Average loss -63.863059160211236
+    Expectancy R:  10.702
+    Profit Factor:  1.323
+    Worst Drawdown:  -6.573822140728483
+    Sharpe:  1.591478523299733
+
+    ORB_Range < 7 * ATR
+    15 Minute Winrate  48.108
+    15 Minute Lossrate 51.892
+    Trades taken:  3012
+    15 Minute Total percent increase:  127.90922153846047
+    Average win 90.95944258639899
+    Average loss -63.866236035238
+    Expectancy R:  10.617
+    Profit Factor:  1.32
+    Worst Drawdown:  -6.502103886754237
+    Sharpe:  1.5817587074185033
+
+    Beyond a 7 * ATR it becomes useless and does not affect results whatsoever. Sample size is also smaller because we had to remove one day to account for the first day lacking enough data for the ATR
+
+    So the ORB_Range < 5 * ATR is the top
+
+    I think I have adequately tested it and am ready to move on to the next stage. Theres more I wish I could do such as factor in economic news day but that requires data that I do not have access to, so this will be a good point for me to move onto the next stage.
+    
