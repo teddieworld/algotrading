@@ -937,3 +937,5 @@ Research Question: How can I implement a trading strategy to produce a statistic
     Sharpe:  1.484314768483175
 
     For the strongest iteration. I don't believe this will affect the top results of the whole backtest.
+
+    I think now I am ready to move on to the next stage and implement into paper trading.
