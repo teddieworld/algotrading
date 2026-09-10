@@ -870,5 +870,70 @@ Research Question: How can I implement a trading strategy to produce a statistic
 
     So the ORB_Range < 5 * ATR is the top
 
-    I think I have adequately tested it and am ready to move on to the next stage. Theres more I wish I could do such as factor in economic news day but that requires data that I do not have access to, so this will be a good point for me to move onto the next stage.
+    I want to look at year by year results to see consistency rather than just one good year.
+    My dataset is from August 2021 to August 2026 so I am missing the complete years for 2021 and 2026 so I will only test the complete years that I have.
+
+    2022:
+    15 Minute Winrate  45.743
+    15 Minute Lossrate 54.257
+    Trades taken:  599
+    15 Minute Total percent increase:  20.55753230769206
+    Average win 101.43674340258274
+    Average loss -69.7054911242605
+    Expectancy R:  8.58
+    Profit Factor:  1.227
+    Worst Drawdown:  -6.064475357100578
+    Sharpe:  1.1942667235472382
+
+    2023:
+    15 Minute Winrate  48.083
+    15 Minute Lossrate 51.917
+    Trades taken:  626
+    15 Minute Total percent increase:  17.656676923076738
+    Average win 63.13690263225124
+    Average loss -44.8924260355029
+    Expectancy R:  7.051
+    Profit Factor:  1.303
+    Worst Drawdown:  -2.9233919234075403
+    Sharpe:  1.4605478894095532
+
+    2024
+    15 Minute Winrate  46.504
+    15 Minute Lossrate 53.496
+    Trades taken:  615
+    15 Minute Total percent increase:  24.111067692307554
+    Average win 85.36686390532554
+    Average loss -55.888012625672395
+    Expectancy R:  9.801
+    Profit Factor:  1.328
+    Worst Drawdown:  -4.3703093787886225
+    Sharpe:  1.803616351412265
+
+    2025:
+    15 Minute Winrate  49.911
+    15 Minute Lossrate 50.089
+    Trades taken:  563
+    15 Minute Total percent increase:  36.62406153846107
+    Average win 106.95052833287643
+    Average loss -74.10313147845038
+    Expectancy R:  16.263
+    Profit Factor:  1.438
+    Worst Drawdown:  -4.684365698237694
+    Sharpe:  2.422767417865319
     
+    Ok, I don't see any abnormal outliers, 2025 performed very well compared to the others but I'll attribute that to the market just performing very well in general.
+
+    I just caught an error within the logic of my program which allows a trade to be taken the same candle that the ORB is set, so fixing that accurately changes the results to:
+
+    15 Minute Winrate  48.011
+    15 Minute Lossrate 51.989
+    Trades taken:  2916
+    15 Minute Total percent increase:  118.78964615384533
+    Average win 92.08831758241747
+    Average loss -65.45266034097833
+    Expectancy R:  10.184
+    Profit Factor:  1.299
+    Worst Drawdown:  -5.373276842137774
+    Sharpe:  1.484314768483175
+
+    For the strongest iteration. I don't believe this will affect the top results of the whole backtest.
