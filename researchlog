@@ -939,3 +939,7 @@ Research Question: How can I implement a trading strategy to produce a statistic
     For the strongest iteration. I don't believe this will affect the top results of the whole backtest.
 
     I think now I am ready to move on to the next stage and implement into paper trading.
+
+    I have to purchase live market data API and broker API which can get quite expensive so I need to figure out what to do.
+
+    I would have to restructure my program logic to work with the broker API.
