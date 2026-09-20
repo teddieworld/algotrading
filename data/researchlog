@@ -947,3 +947,8 @@ Research Question: How can I implement a trading strategy to produce a statistic
 9/20/26
     Had to take a big pause because I initially wanted to use NinjaTrader's REST API but that required me to move money from broker to broker which took a while, just to end up not working, so I have just copied my files onto my windows PC
     Now we will try using NinjaTrader 8 to locally run the simulated trading on my computer.
+
+    I was able to successfully connect to NinjaTrader and begin grabbing market data
+
+    Future:
+        - Once Sunday market open at 3PM, I will try testing live market connection and readings
