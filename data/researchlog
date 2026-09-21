@@ -975,3 +975,7 @@ Research Question: How can I implement a trading strategy to produce a statistic
     I tested around with the different order types and parameters in my simulated account and they all functioned properly. Now time to implement actual order fills into my live program.
 
     After a long couple hours, I managed to program in the basics of the strategy but have yet to implement any of the filters I discovered during the backtest. This upcoming week I will test is live and continue adding improvements.
+
+9/21/26
+    As of today, I have $48,479.20 in the simulation account so we will keep track of PnL from that.
+    It looks like everything worked perfectly. We made a simulated profit of $114.60 and we will continue testing tomorrow.

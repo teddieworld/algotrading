@@ -280,7 +280,6 @@ try:
 
         # the program will only keep track of the candles that are after 6:30 AM; market open
         if (current_time.time() < pd.to_datetime("6:30").time()):
-            print("Not running yet")
             continue
 
         if current_time.time() >= pd.to_datetime("13:00").time():
@@ -338,6 +337,7 @@ try:
                 ORB_Low = candles["Low"].min()
                 ORB_Range = ORB_High - ORB_Low
                 orbValuesSet = True
+                print("ORB Range Set")
 
              # check for breakouts
             if orbValuesSet == True and trade_taken == False:
@@ -348,9 +348,11 @@ try:
                 if candles.iloc[-1]["Close"] > ORB_High:
                     position = "long"
                     trade_taken = executeTrade(position, marketOrder, stopLossOrder, takeProfitOrder, oco_Id)
+                    print("Entered ", position)
                 elif candles.iloc[-1]["Close"] < ORB_Low:
                     position = "short"
                     trade_taken = executeTrade(position, marketOrder, stopLossOrder, takeProfitOrder, oco_Id)
+                    print("Entered ", position)
             bar_start = current5mperiod
             open_price = last
             high_price = last
