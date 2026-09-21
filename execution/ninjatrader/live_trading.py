@@ -32,4 +32,4 @@ except KeyboardInterrupt: #when program stops or is interrupted by input
 finally: 
     client.UnsubscribeMarketData("MNQ DEC26") 
     client.TearDown()
-    #shut down connection NinjaTrader   
+    #shut down connection to NinjaTrader   
