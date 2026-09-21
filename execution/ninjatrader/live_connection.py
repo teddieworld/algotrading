@@ -2,7 +2,6 @@ import clr
 import time
 from datetime import datetime
 import pandas as pd
-import System
 
 clr.AddReference(r"C:\Program Files\NinjaTrader 8\bin\NinjaTrader.Client.dll") #load ninjatrader client
 from NinjaTrader.Client import Client
