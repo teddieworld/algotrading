@@ -956,3 +956,22 @@ Research Question: How can I implement a trading strategy to produce a statistic
 9/20/26
     Just ran it while the market is live and open, and it works; now time to implement the ORB strategy.
     I was able to track each 5 minute candle and then program in my SL and TP logic with the breakouts, and now to figure out how to send live orders.
+
+    Parameters for sending an order:
+    0  command
+    1  account
+    2  instrument
+    3  action
+    4  quantity
+    5  orderType
+    6  limitPrice
+    7  stopPrice
+    8  timeInForce
+    9  oco
+    10 orderId
+    11 tpl
+    12 strategy
+
+    I tested around with the different order types and parameters in my simulated account and they all functioned properly. Now time to implement actual order fills into my live program.
+
+    After a long couple hours, I managed to program in the basics of the strategy but have yet to implement any of the filters I discovered during the backtest. This upcoming week I will test is live and continue adding improvements.
