@@ -1,5 +1,5 @@
 # algotrading
-This is my journey starting algorithmic trading through programming trading strategies There will be three stages:
+I am doing algorithmic trading through programming trading strategies There will be three stages:
   - Backtesting using historical market data to evaluate the strategy's performance historically and collecting statistical data to determine the best variation and strategy to implement to live markets.
   - Once the most statistically successful strategy has been found, implement the strategy into live running markets through paper trading with (fake money) and collect data on those results for further evaluation of the strategy's success
   - After paper trading results are deemed profitable and successful, begin using real money to trade live markets
