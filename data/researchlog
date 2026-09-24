@@ -983,3 +983,8 @@ Research Question: How can I implement a trading strategy to produce a statistic
 9/22/26
     Today I let it run while I slept. It took a losing trade and lost $33.00. I will continue simulating throughout these next weeks
     
+9/24/26
+    First day automating it and let it run automatically, took a loss today and lost $4.90. Thinking about reevaluating the strategy because the very small stop loss doesn't seem viable.
+    It might produce good results in the backtest but having such a small stoploss makes it very vulnrable to noise. 
+
+    I just tested some more SL logic real quick and nothing seemed to beat the small SL so I'll stick with it and see how it goes.
