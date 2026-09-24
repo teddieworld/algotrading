@@ -2,6 +2,13 @@ import clr
 import time
 from datetime import datetime
 import pandas as pd
+import logging
+
+logging.basicConfig(
+    filename= r"C:\Users\teddi\OneDrive\Pictures\vscode\algotrading\algotrading\data\trading.log",
+    level=logging.INFO,
+    format="%(asctime)s - %(message)s"
+)
 
 # load ninjatrader client
 clr.AddReference(r"C:\Program Files\NinjaTrader 8\bin\NinjaTrader.Client.dll")
@@ -37,6 +44,7 @@ def executeTrade(position, marketOrder, stopLossOrder, takeProfitOrder, oco_Id):
         # Once the loop ends are the order is filled, we set the entry_price and TP
         entry_price = client.AvgFillPrice(marketOrder)
         TP = entry_price + ((entry_price - SL) * TP_Ratio)
+        logging.info("Market order filled")
         # Execute SL
         sl_result = client.Command(
             "PLACE",
@@ -99,7 +107,7 @@ def executeTrade(position, marketOrder, stopLossOrder, takeProfitOrder, oco_Id):
         # Once the loop ends are the order is filled, we set the entry_price and TP
         entry_price = client.AvgFillPrice(marketOrder)
         TP = entry_price - ((SL - entry_price) * TP_Ratio)
-
+        logging.info("Market order filled")
         # Execute SL
         sl_result = client.Command(
             "PLACE",
@@ -349,10 +357,12 @@ try:
                     position = "long"
                     trade_taken = executeTrade(position, marketOrder, stopLossOrder, takeProfitOrder, oco_Id)
                     print("Entered ", position)
+                    logging.info("Entered ", position)
                 elif candles.iloc[-1]["Close"] < ORB_Low:
                     position = "short"
                     trade_taken = executeTrade(position, marketOrder, stopLossOrder, takeProfitOrder, oco_Id)
                     print("Entered ", position)
+                    logging.info("Entered ", position)
             bar_start = current5mperiod
             open_price = last
             high_price = last
