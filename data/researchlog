@@ -988,3 +988,6 @@ Research Question: How can I implement a trading strategy to produce a statistic
     It might produce good results in the backtest but having such a small stoploss makes it very vulnrable to noise. 
 
     I just tested some more SL logic real quick and nothing seemed to beat the small SL so I'll stick with it and see how it goes.
+
+9/25/26
+    Took another L today and los -$47.50. Unfortunately was busy on Wednesday so did run the bot on that day. Will continue trading next week.
