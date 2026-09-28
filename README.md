@@ -1,12 +1,22 @@
 # algotrading
-I am doing algorithmic trading through programming trading strategies There will be three stages:
-  - Backtesting using historical market data to evaluate the strategy's performance historically and collecting statistical data to determine the best variation and strategy to implement to live markets.
-  - Once the most statistically successful strategy has been found, implement the strategy into live running markets through paper trading with (fake money) and collect data on those results for further evaluation of the strategy's success
-  - After paper trading results are deemed profitable and successful, begin using real money to trade live markets
+This project is an algorithmic trading system focused on researching, backtesting, and implementing an Opening Range Breakout (ORB) strategy on Nasdaq futures.
+
+The strategy uses historical market data to test breakout entries, stop-loss placement, take-profit targets, and additional filters before being adapted for live market data.
 
 Research Question: How can I implement a trading strategy to produce a statistically significant edge in trading live markets (NASDAQ and S&P 500)?
 
-Strategy: The strategy I have chosen to implement is the "15M ORB Strategy". In it's simplest form, we wait for the 15M candle of the New York session open (9:30 AM EST) on NASDAQ or S&P 500 Futures and use the high and low of that candle as our range. Once a 5M candle closes above or below that range, a trade is taken.
+## Strategy
+The strategy I have chosen to implement is the "15M ORB Strategy". In it's simplest form, we wait for the 15M candle of the New York session open (9:30 AM EST) on NASDAQ or S&P 500 Futures and use the high and low of that candle as our range. Once a 5M candle closes above or below that range, a trade is entered
+## Tech Stack
+  - Python
+  - pandas
+  - NumPy
+  - pandas-ta
+  - Matplotlib / mplfinance
+  - Databento
+  - NinjaTrader 8
+  - pythonnet
+  - Git / GitHub
 
 Stage 1: Backtest against historical data
   The statistics will be taken trading only 1 contract on MNQ futures, which has a signficant impact on %Increase as the futures are highly leveraged.
