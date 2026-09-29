@@ -43,8 +43,8 @@ def executeTrade(position, marketOrder, stopLossOrder, takeProfitOrder, oco_Id):
             time.sleep(0.1)
         # Once the loop ends are the order is filled, we set the entry_price and TP
         entry_price = client.AvgFillPrice(marketOrder)
+        logging.info(f"{position} entry filled at {entry_price}")
         TP = entry_price + ((entry_price - SL) * TP_Ratio)
-        logging.info("Market order filled")
         # Execute SL
         sl_result = client.Command(
             "PLACE",
@@ -106,8 +106,8 @@ def executeTrade(position, marketOrder, stopLossOrder, takeProfitOrder, oco_Id):
             time.sleep(0.1)
         # Once the loop ends are the order is filled, we set the entry_price and TP
         entry_price = client.AvgFillPrice(marketOrder)
+        logging.info(f"{position} entry filled at {entry_price}")
         TP = entry_price - ((SL - entry_price) * TP_Ratio)
-        logging.info("Market order filled")
         # Execute SL
         sl_result = client.Command(
             "PLACE",
@@ -290,6 +290,7 @@ try:
         if (current_time.time() < pd.to_datetime("6:30").time()):
             continue
 
+        #if the time is ever greater than 1:00 PM, then everything is reset
         if current_time.time() >= pd.to_datetime("13:00").time():
             candles = pd.DataFrame(columns=["Date", "Open", "High", "Low", "Close", "Volume"])
             bar_start = None
@@ -307,11 +308,18 @@ try:
         elif current_time.time() >= pd.to_datetime("8:15").time():
             trade_taken = True
 
-        if position != None:
+        if position != None: #If a position has been set, continuously check wheter the SL or TP have been filled and log the info and set position to None
             sl_status = client.OrderStatus(stopLossOrder)
             tp_status = client.OrderStatus(takeProfitOrder)
 
-            if sl_status == "Filled" or tp_status == "Filled":
+            if sl_status == "Filled":
+                fill_price = client.AvgFillPrice(stopLossOrder)
+                logging.info(f"Stop loss filled at {fill_price}")
+                position = None
+
+            elif tp_status == "Filled":
+                fill_price = client.AvgFillPrice(takeProfitOrder)
+                logging.info(f"Take profit filled at {fill_price}")
                 position = None
 
         if bar_start == None:  # if the first candle has yet to be set, then set each value to whatever is currently the price
@@ -348,7 +356,11 @@ try:
                 print("ORB Range Set")
 
              # check for breakouts
-            if orbValuesSet == True and trade_taken == False:
+            if (
+                (orbValuesSet == True)
+                and (trade_taken == False)
+                and (ORB_Range < 250)
+                ): 
                 marketOrder = client.NewOrderId()
                 stopLossOrder = client.NewOrderId()
                 takeProfitOrder = client.NewOrderId()

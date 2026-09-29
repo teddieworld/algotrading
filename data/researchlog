@@ -990,7 +990,12 @@ Research Question: How can I implement a trading strategy to produce a statistic
     I just tested some more SL logic real quick and nothing seemed to beat the small SL so I'll stick with it and see how it goes.
 
 9/25/26
-    Took another L today and los -$47.50. Unfortunately was busy on Wednesday so did run the bot on that day. Will continue trading next week.
+    Took another L today and lost -$47.50. Unfortunately was busy on Wednesday so did run the bot on that day. Will continue trading next week.
 
 9/28/26
-    Entered a trade today and had a winning trade with $26.00.
+    Entered a trade today and had a winning trade with $26.00. I'm not too worried about the actual money number because that can be scaled but more with the winrate.
+    Currently: 
+        - Win rate: 50%
+        - Realized PnL: $70.50
+        - Average trade PnL: $3.20
+        - Drawdown: -$91.10
