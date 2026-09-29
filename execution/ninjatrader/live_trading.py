@@ -355,7 +355,7 @@ try:
                 orbValuesSet = True
                 print("ORB Range Set")
 
-             # check for breakouts
+             # check for breakouts and conditions
             if (
                 (orbValuesSet == True)
                 and (trade_taken == False)
