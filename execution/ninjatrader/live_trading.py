@@ -197,6 +197,7 @@ def liquidatePositions(position, stopLossOrder, takeProfitOrder):
         while client.OrderStatus(liquidationOrder) != "Filled":
             time.sleep(0.1)
         print("Long order liquidated")
+        logging.info("Long position liquidated at 1:00 PM")
     elif position == "short":
         client.Command(
             "CANCEL",
@@ -245,7 +246,8 @@ def liquidatePositions(position, stopLossOrder, takeProfitOrder):
         ) 
         while client.OrderStatus(liquidationOrder) != "Filled":
             time.sleep(0.1)
-        print("Long order liquidated")
+        print("Short order liquidated")
+        logging.info("Short position liquidated at 1:00 PM")
 
 
 client = Client()  # create a Client object
