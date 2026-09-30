@@ -329,7 +329,7 @@ try:
                 logging.info(f"Take profit filled at {fill_price}")
                 position = None
 
-        if previous1mperiod == None:
+        """if previous1mperiod == None:
             previous1mperiod = current1mperiod
 
         elif current1mperiod != previous1mperiod:
@@ -337,7 +337,7 @@ try:
             connected = client.Connected(0)
             print("Connection status: ", connected)
             logging.info(f"NinjaTrader connection status: {connected}") 
-            previous1mperiod = current1mperiod
+            previous1mperiod = current1mperiod"""
 
         if bar_start == None:  # if the first candle has yet to be set, then set each value to whatever is currently the price
             bar_start = current5mperiod
