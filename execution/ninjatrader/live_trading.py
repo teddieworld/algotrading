@@ -255,7 +255,6 @@ client = Client()  # create a Client object
 result = client.SetUp("127.0.0.1", 36973)  # connect to NinjaTrader
 print("SetUp result:", result)
 print("Connected:", client.Connected(0))
-logging.info(f"NinjaTrader connection status: {client.Connected(0)}")
 
 subscribeResult = client.SubscribeMarketData(
     "MNQ DEC26")  # start getting market data
