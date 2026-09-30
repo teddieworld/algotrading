@@ -5,7 +5,7 @@ The strategy uses historical market data to test breakout entries, stop-loss pla
 
 Research Question: How can I implement a trading strategy to produce a statistically significant edge in trading live markets (NASDAQ and S&P 500)?
 
-View experiment log: [Experiment Log](data/experimentlog/experimentlog.csv)
+View experiment log: [Experiment Log](data/experimentlog.csv)
 
 View research log:: [Research Log](data/researchlog)
 
