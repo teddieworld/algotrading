@@ -9,6 +9,8 @@ logging.basicConfig(
     level=logging.INFO,
     format="%(asctime)s - %(message)s"
 )
+logging.info("")
+logging.info(f"========== {datetime.now().strftime('%Y-%m-%d')} ==========")
 
 # load ninjatrader client
 clr.AddReference(r"C:\Program Files\NinjaTrader 8\bin\NinjaTrader.Client.dll")
@@ -332,6 +334,7 @@ try:
         elif current1mperiod != previous1mperiod:
             #new minute
             connected = client.Connected(0)
+            print("Connection status: ", connected)
             logging.info(f"NinjaTrader connection status: {connected}") 
             previous1mperiod = current1mperiod
 
