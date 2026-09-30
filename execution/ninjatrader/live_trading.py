@@ -251,6 +251,7 @@ client = Client()  # create a Client object
 result = client.SetUp("127.0.0.1", 36973)  # connect to NinjaTrader
 print("SetUp result:", result)
 print("Connected:", client.Connected(0))
+logging.info(f"NinjaTrader connection status: {client.Connected(0)}")
 
 subscribeResult = client.SubscribeMarketData(
     "MNQ DEC26")  # start getting market data
@@ -277,6 +278,7 @@ starting_volume = None
 candles = pd.DataFrame(
     columns=["Date", "Open", "High", "Low", "Close", "Volume"])
 orbValuesSet = False
+previous1mperiod = None
 
 try:
     while True:  # repeatedly grab market data
@@ -285,6 +287,8 @@ try:
         current_time = datetime.now()
         minute5candle = (current_time.minute // 5) * 5
         current5mperiod = current_time.replace(minute=minute5candle, second=0, microsecond=0)
+
+        current1mperiod = current_time.replace(second=0, microsecond=0)
 
         # the program will only keep track of the candles that are after 6:30 AM; market open
         if (current_time.time() < pd.to_datetime("6:30").time()):
@@ -321,6 +325,15 @@ try:
                 fill_price = client.AvgFillPrice(takeProfitOrder)
                 logging.info(f"Take profit filled at {fill_price}")
                 position = None
+
+        if previous1mperiod == None:
+            previous1mperiod = current1mperiod
+
+        elif current1mperiod != previous1mperiod:
+            #new minute
+            connected = client.Connected(0)
+            logging.info(f"NinjaTrader connection status: {connected}") 
+            previous1mperiod = current1mperiod
 
         if bar_start == None:  # if the first candle has yet to be set, then set each value to whatever is currently the price
             bar_start = current5mperiod
@@ -369,12 +382,12 @@ try:
                     position = "long"
                     trade_taken = executeTrade(position, marketOrder, stopLossOrder, takeProfitOrder, oco_Id)
                     print("Entered ", position)
-                    logging.info("Entered ", position)
+                    logging.info(f"Entered {position}")
                 elif candles.iloc[-1]["Close"] < ORB_Low:
                     position = "short"
                     trade_taken = executeTrade(position, marketOrder, stopLossOrder, takeProfitOrder, oco_Id)
                     print("Entered ", position)
-                    logging.info("Entered ", position)
+                    logging.info(f"Entered {position}")
             bar_start = current5mperiod
             open_price = last
             high_price = last
