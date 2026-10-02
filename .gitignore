@@ -6,4 +6,5 @@ __pycache__/
 .DS_Store
 data/DBNQOHLCV5M.csv
 data/trading.log
+data/DBNQOHLCV5M_normalized.csv
 *.log

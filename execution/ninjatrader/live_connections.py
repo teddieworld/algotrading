@@ -19,7 +19,7 @@ print("Subscribe result:", subscribeResult)
 
 
 
-marketOrder = client.NewOrderId()
+"""marketOrder = client.NewOrderId()
 stopLossOrder = client.NewOrderId()
 takeProfitOrder = client.NewOrderId()
 oco_Id = client.NewOrderId()
@@ -87,7 +87,7 @@ print("TP status:", client.OrderStatus(takeProfitOrder))
 print("Entry filled:", client.Filled(marketOrder))
 print("SL filled:", client.Filled(stopLossOrder))
 print("TP filled:", client.Filled(takeProfitOrder))
-
+"""
 
 
 
@@ -95,7 +95,7 @@ print("TP filled:", client.Filled(takeProfitOrder))
 try:
     while True: #repeatedly grab market data
         last = client.MarketData("MNQ DEC26", 0)
-
+        print(client.MarketData("MNQ DEC26", 6))
         time.sleep(1) #every second grab data
 
 except KeyboardInterrupt: #when program stops or is interrupted by input

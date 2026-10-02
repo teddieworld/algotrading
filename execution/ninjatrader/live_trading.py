@@ -20,7 +20,7 @@ def executeTrade(position, marketOrder, stopLossOrder, takeProfitOrder, oco_Id):
     if position == "long":
         # Enter long
         entry_time = candles.iloc[-1]["Date"]
-        SL = ORB_High - ORB_Range/SLdivider
+        SL = ORB_Low
 
         # Create order IDS for each order type
 
@@ -83,7 +83,7 @@ def executeTrade(position, marketOrder, stopLossOrder, takeProfitOrder, oco_Id):
     elif position == "short":
         # Enter short
         entry_time = candles.iloc[-1]["Date"]
-        SL = ORB_Low + ORB_Range/SLdivider
+        SL = ORB_High
 
         # Create order IDS for each order type
 
@@ -197,6 +197,7 @@ def liquidatePositions(position, stopLossOrder, takeProfitOrder):
         while client.OrderStatus(liquidationOrder) != "Filled":
             time.sleep(0.1)
         print("Long order liquidated")
+        trade_open = False
         logging.info("Long position liquidated at 1:00 PM")
     elif position == "short":
         client.Command(
@@ -247,6 +248,7 @@ def liquidatePositions(position, stopLossOrder, takeProfitOrder):
         while client.OrderStatus(liquidationOrder) != "Filled":
             time.sleep(0.1)
         print("Short order liquidated")
+        trade_open = False
         logging.info("Short position liquidated at 1:00 PM")
 
 
@@ -263,10 +265,9 @@ print("Subscribe result:", subscribeResult)
 time.sleep(2)
 
 # Strategy parameters
-TP_Ratio = 2
+TP_Ratio = 1.5
 contract_size = 1
-SLdivider = 650
-trade_taken = False
+trade_open = False
 position = None
 stopLossOrder = None
 takeProfitOrder = None
@@ -298,12 +299,13 @@ try:
             continue
 
         #if the time is ever greater than 1:00 PM, then everything is reset
-        if current_time.time() >= pd.to_datetime("13:00").time():
+        if current_time.time() >= pd.to_datetime("11:55").time():
             candles = pd.DataFrame(columns=["Date", "Open", "High", "Low", "Close", "Volume"])
             bar_start = None
             open_price = None
             high_price = None
             low_price = None
+            trade_open = False
             close_price = None
             candle_volume = None
             starting_volume = None
@@ -312,8 +314,6 @@ try:
             liquidatePositions(position, stopLossOrder, takeProfitOrder)
             position = None
             break
-        elif current_time.time() >= pd.to_datetime("8:15").time():
-            trade_taken = True
 
         if position != None: #If a position has been set, continuously check wheter the SL or TP have been filled and log the info and set position to None
             sl_status = client.OrderStatus(stopLossOrder)
@@ -322,11 +322,13 @@ try:
             if sl_status == "Filled":
                 fill_price = client.AvgFillPrice(stopLossOrder)
                 logging.info(f"Stop loss filled at {fill_price}")
+                trade_open = False
                 position = None
 
             elif tp_status == "Filled":
                 fill_price = client.AvgFillPrice(takeProfitOrder)
                 logging.info(f"Take profit filled at {fill_price}")
+                trade_open = False
                 position = None
 
         """if previous1mperiod == None:
@@ -375,8 +377,9 @@ try:
              # check for breakouts and conditions
             if (
                 (orbValuesSet == True)
-                and (trade_taken == False)
-                and (ORB_Range < 250)
+                and (trade_open == False)
+                and (ORB_Range < 150)
+                and (current_time.time() < pd.to_datetime("11:55").time())
                 ): 
                 marketOrder = client.NewOrderId()
                 stopLossOrder = client.NewOrderId()
@@ -384,12 +387,12 @@ try:
                 oco_Id = client.NewOrderId()
                 if candles.iloc[-1]["Close"] > ORB_High:
                     position = "long"
-                    trade_taken = executeTrade(position, marketOrder, stopLossOrder, takeProfitOrder, oco_Id)
+                    trade_open = executeTrade(position, marketOrder, stopLossOrder, takeProfitOrder, oco_Id)
                     print("Entered ", position)
                     logging.info(f"Entered {position}")
                 elif candles.iloc[-1]["Close"] < ORB_Low:
                     position = "short"
-                    trade_taken = executeTrade(position, marketOrder, stopLossOrder, takeProfitOrder, oco_Id)
+                    trade_open = executeTrade(position, marketOrder, stopLossOrder, takeProfitOrder, oco_Id)
                     print("Entered ", position)
                     logging.info(f"Entered {position}")
             bar_start = current5mperiod

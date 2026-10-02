@@ -1007,5 +1007,25 @@ Research Question: How can I implement a trading strategy to produce a statistic
     Took a trade today with a loss of -$84.40.
 
 8/1/26
-    Took a losso f $53.90 today. Starting to reevaluate the strategy but I will see after next week.
+    Took a loss of $53.90 today. Starting to reevaluate the strategy but I will see after next week. I want to go back and test different stop sizes and see results. Ok I just tested around some more SL values and none trumped my existing variation. However, I am going to remove the one trade per day rule in my live trading bot because that is what it is in my backtest.
 
+    I made some major adjustments to the trading bot to make it resemble my backtest strategy more so we will see how that pans out.
+
+    I just encountered an error in my program, the dataset has been off certain parts of the year based on daylight savings so I need to adjust the dataset for this. 
+
+    I fixed the bug and the results are still very similar so I don't believe it impacted my data significantly.
+
+    I did some more testing: The best iteration so far is where SL is at the opposite ORB and the range < 150 points
+
+    15 Minute Winrate  50.236
+    15 Minute Lossrate 49.764
+    Trades taken:  1272
+    15 Minute Total percent increase:  106.23
+    Average win 212.2185534591195
+    Average loss -170.46147798742138
+    Expectancy R:  21.781
+    Profit Factor:  1.245
+    Worst Drawdown:  -6.290799066088532
+    Sharpe:  1.1451626285144099
+
+    I think I will have to go back to the drawing board.
