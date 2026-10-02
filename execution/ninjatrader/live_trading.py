@@ -310,7 +310,9 @@ try:
             candle_volume = None
             starting_volume = None
             orbValuesSet = False
-            ORB_High, ORB_Low, ORB_Range = None
+            ORB_High = None
+            ORB_Low = None
+            ORB_Range = None
             liquidatePositions(position, stopLossOrder, takeProfitOrder)
             position = None
             break
