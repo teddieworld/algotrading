@@ -1006,7 +1006,7 @@ Research Question: How can I implement a trading strategy to produce a statistic
 9/30/26
     Took a trade today with a loss of -$84.40.
 
-8/1/26
+10/1/26
     Took a loss of $53.90 today. Starting to reevaluate the strategy but I will see after next week. I want to go back and test different stop sizes and see results. Ok I just tested around some more SL values and none trumped my existing variation. However, I am going to remove the one trade per day rule in my live trading bot because that is what it is in my backtest.
 
     I made some major adjustments to the trading bot to make it resemble my backtest strategy more so we will see how that pans out.
@@ -1029,3 +1029,6 @@ Research Question: How can I implement a trading strategy to produce a statistic
     Sharpe:  1.1451626285144099
 
     I think I will have to go back to the drawing board.
+
+10/2/26
+    Took a loss of $253 today. It's too soon to mark it as a failure as it is my first day with this iteration of the strategy, so we will continue testing into next week.
