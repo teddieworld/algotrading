@@ -256,10 +256,15 @@ client = Client()  # create a Client object
 
 result = client.SetUp("127.0.0.1", 36973)  # connect to NinjaTrader
 print("SetUp result:", result)
+while client.Connected(0) != 0: #wait until connection is made
+    print("Connection failed, trying again")
+    time.sleep(30)
+
+    result = client.SetUp("127.0.0.1", 36973)
+    print("Connected:", client.Connected(0))
 print("Connected:", client.Connected(0))
 
-subscribeResult = client.SubscribeMarketData(
-    "MNQ DEC26")  # start getting market data
+subscribeResult = client.SubscribeMarketData("MNQ DEC26")  # start getting market data
 print("Subscribe result:", subscribeResult)
 
 time.sleep(2)
@@ -286,6 +291,16 @@ previous1mperiod = None
 
 try:
     while True:  # repeatedly grab market data
+        while client.Connected(0) != 0: #wait until connection is made
+            print("Connection failed, trying again")
+            time.sleep(30)
+
+            result = client.SetUp("127.0.0.1", 36973)
+            print("Connected:", client.Connected(0))
+        print("Connected:", client.Connected(0))
+        subscribeResult = client.SubscribeMarketData("MNQ DEC26")  # start getting market data
+        print("Subscribe result:", subscribeResult)
+
         last = client.MarketData("MNQ DEC26", 0)
         volume = client.MarketData("MNQ DEC26", 6)
         current_time = datetime.now()
