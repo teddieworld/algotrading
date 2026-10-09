@@ -251,6 +251,19 @@ def liquidatePositions(position, stopLossOrder, takeProfitOrder):
         trade_open = False
         logging.info("Short position liquidated at 1:00 PM")
 
+def connectionIsActive():
+    connection_file = r"C:\Users\teddi\OneDrive\Documents\NinjaTrader 8\outgoing\Simulation.txt"
+
+    try:
+        with open(connection_file, "r") as file:
+            status = file.read().strip()
+
+        return status == "CONNECTED"
+    
+    except FileNotFoundError:
+        return False
+
+
 
 client = Client()  # create a Client object
 
@@ -288,18 +301,27 @@ candles = pd.DataFrame(
     columns=["Date", "Open", "High", "Low", "Close", "Volume"])
 orbValuesSet = False
 previous1mperiod = None
+reconnected_ati = False
 
 try:
     while True:  # repeatedly grab market data
-        while client.Connected(0) != 0: #wait until connection is made
+        while client.Connected(0) != 0 or not connectionIsActive(): #wait until connection is made
             print("Connection failed, trying again")
-            time.sleep(30)
+            time.sleep(5)
 
-            result = client.SetUp("127.0.0.1", 36973)
-            print("Connected:", client.Connected(0))
-        print("Connected:", client.Connected(0))
-        subscribeResult = client.SubscribeMarketData("MNQ DEC26")  # start getting market data
-        print("Subscribe result:", subscribeResult)
+            if client.Connected(0) != 0:
+                result = client.SetUp("127.0.0.1", 36973)
+
+                if client.Connected(0) == 0:
+                    print("Connection successful")
+                    reconnected_ati = True
+
+            if connectionIsActive():
+                print("Connection successful")
+
+        if reconnected_ati:
+            client.SubscribeMarketData("MNQ DEC26")
+            reconnected_ati = False
 
         last = client.MarketData("MNQ DEC26", 0)
         volume = client.MarketData("MNQ DEC26", 6)
