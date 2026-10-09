@@ -302,26 +302,29 @@ candles = pd.DataFrame(
 orbValuesSet = False
 previous1mperiod = None
 reconnected_ati = False
+was_disconnected = False
 
 try:
     while True:  # repeatedly grab market data
         while client.Connected(0) != 0 or not connectionIsActive(): #wait until connection is made
             print("Connection failed, trying again")
+            was_disconnected = True
             time.sleep(5)
 
             if client.Connected(0) != 0:
                 result = client.SetUp("127.0.0.1", 36973)
 
                 if client.Connected(0) == 0:
-                    print("Connection successful")
                     reconnected_ati = True
-
-            if connectionIsActive():
-                print("Connection successful")
 
         if reconnected_ati:
             client.SubscribeMarketData("MNQ DEC26")
             reconnected_ati = False
+
+        if was_disconnected:
+            print("Connection Successful")
+            was_disconnected = False
+
 
         last = client.MarketData("MNQ DEC26", 0)
         volume = client.MarketData("MNQ DEC26", 6)
