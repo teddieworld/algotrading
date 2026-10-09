@@ -309,7 +309,7 @@ try:
         while client.Connected(0) != 0 or not connectionIsActive(): #wait until connection is made
             print("Connection failed, trying again")
             was_disconnected = True
-            time.sleep(5)
+            time.sleep(30)
 
             if client.Connected(0) != 0:
                 result = client.SetUp("127.0.0.1", 36973)
