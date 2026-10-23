@@ -4,7 +4,6 @@ venv/
 __pycache__/
 *.pyc
 .DS_Store
-data/DBNQOHLCV5M.csv
 data/trading.log
-data/DBNQOHLCV5M_normalized.csv
+data/NQDATA.csv
 *.log
