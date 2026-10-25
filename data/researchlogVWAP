@@ -1,0 +1,31 @@
+10/22/26
+    I want to test a new strategy with VWAP
+
+    This strategy measures an entry on a pullback to the VWAP which can offer an opportunity to enter a trade. 
+    This time I will account for slippage and commissions before testing out different regimes because it had a significant effect the last time.
+    I am using the updated proper dataset this time so there shouldn't be any errors in the dataset and how it produces results.
+
+    I will be collecting data on:
+        - trade count
+        - win rate
+        - loss rate
+        - total % increase throughout the 5 years
+        - average win and loss
+        - expectancy in R
+        - profit factor
+        - maximum drawdown
+
+    I will use a 1 minute dataset this time for further accuracy.
+
+    The initial systematic rules for this strategy (these rules can change):
+        - Session: 9:30 AM to 4:00 PM ET
+        - NQ Futures
+        - VWAP for the session
+        - Long Entry:
+            - Price > VWAP
+            - VWAP is rising
+            - Price returns to VWAP and rejects it
+            - After a rejection confirmation, a trade is entered
+            - Stop: below the low of the pullback
+            - TP: 2x the stop 
+        - Short position mirros the long

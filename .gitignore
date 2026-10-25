@@ -5,5 +5,6 @@ __pycache__/
 *.pyc
 .DS_Store
 data/trading.log
-data/NQDATA.csv
+data/5mNQData.csv
+data/1mNQData.csv
 *.log
