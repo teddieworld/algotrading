@@ -9,3 +9,5 @@ data/NQDATA.csv
 .env
 
 *.log
+*.log.*
+execution/logs/
