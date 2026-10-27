@@ -283,7 +283,7 @@ print("Subscribe result:", subscribeResult)
 time.sleep(2)
 
 # Strategy parameters
-TP_Ratio = 1.5
+TP_Ratio = 1
 contract_size = 1
 trade_open = False
 position = None
