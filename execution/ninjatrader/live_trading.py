@@ -145,111 +145,35 @@ def executeTrade(position, marketOrder, stopLossOrder, takeProfitOrder, oco_Id):
         return True
 
 def liquidatePositions(position, stopLossOrder, takeProfitOrder):
-    if position == None:
-        return
-    liquidationOrder = client.NewOrderId()
-    if position == "long":
-        client.Command(
-            "CANCEL",
-            "DEMO9688373",
-            "MNQ DEC26",
-            "",
-            0,
-            "",
-            0,
-            0,
-            "",
-            "",
-            stopLossOrder,
-            "",
-            ""
-        )
-        client.Command(
-            "CANCEL",
-            "DEMO9688373",
-            "MNQ DEC26",
-            "",
-            0,
-            "",
-            0,
-            0,
-            "",
-            "",
-            takeProfitOrder,
-            "",
-            ""
-        )
-        client.Command( #cancel the long order
-            "PLACE",
-            "DEMO9688373",
-            "MNQ DEC26",
-            "SELL",
-            contract_size,
-            "MARKET",
-            0,
-            0,
-            "DAY",
-            "",
-            liquidationOrder,
-            "",
-            ""
-        )
-        while client.OrderStatus(liquidationOrder) != "Filled":
-            time.sleep(0.1)
-        print("Long order liquidated")
-        trade_open = False
-        logging.info("Long position liquidated at 1:00 PM")
-    elif position == "short":
-        client.Command(
-            "CANCEL",
-            "DEMO9688373",
-            "MNQ DEC26",
-            "",
-            0,
-            "",
-            0,
-            0,
-            "",
-            "",
-            stopLossOrder,
-            "",
-            ""
-        )
-        client.Command(
-            "CANCEL",
-            "DEMO9688373",
-            "MNQ DEC26",
-            "",
-            0,
-            "",
-            0,
-            0,
-            "",
-            "",
-            takeProfitOrder,
-            "",
-            ""
-        )  
-        client.Command( #cancel the short order
-            "PLACE",
-            "DEMO9688373",
-            "MNQ DEC26",
-            "BUY",
-            contract_size,
-            "MARKET",
-            0,
-            0,
-            "DAY",
-            "",
-            liquidationOrder,
-            "",
-            ""
-        ) 
-        while client.OrderStatus(liquidationOrder) != "Filled":
-            time.sleep(0.1)
-        print("Short order liquidated")
-        trade_open = False
-        logging.info("Short position liquidated at 1:00 PM")
+    client.Command(
+        "CLOSEPOSITION",
+        "DEMO9688373",
+        "MNQ DEC26",
+        "",
+        0,
+        "",
+        0,
+        0,
+        "",
+        "",
+        "",
+        "",
+        ""
+    )
+
+    trade_open = False
+    logging.info("Position liquidated at 12:55 PM")
+
+    actual_position = client.MarketPosition("MNQ DEC26", "DEMO9688373")
+    sl_status = client.OrderStatus(stopLossOrder)
+    tp_status = client.OrderStatus(takeProfitOrder)
+    finished = {"Cancelled", "Filled", "Rejected"}
+
+    while actual_position != 0 or sl_status not in finished or tp_status not in finished :
+        actual_position = client.MarketPosition("MNQ DEC26", "DEMO9688373")
+        sl_status = client.OrderStatus(stopLossOrder)
+        tp_status = client.OrderStatus(takeProfitOrder)
+        time.sleep(0.2)
 
 def connectionIsActive():
     connection_file = r"C:\Users\teddi\OneDrive\Documents\NinjaTrader 8\outgoing\Simulation.txt"
@@ -373,15 +297,6 @@ try:
                 trade_open = False
                 position = None
 
-        """if previous1mperiod == None:
-            previous1mperiod = current1mperiod
-
-        elif current1mperiod != previous1mperiod:
-            #new minute
-            connected = client.Connected(0)
-            print("Connection status: ", connected)
-            logging.info(f"NinjaTrader connection status: {connected}") 
-            previous1mperiod = current1mperiod"""
 
         if bar_start == None:  # if the first candle has yet to be set, then set each value to whatever is currently the price
             bar_start = current5mperiod

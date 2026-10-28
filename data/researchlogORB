@@ -1080,3 +1080,7 @@ Research Question: How can I implement a trading strategy to produce a statistic
     No trade.
 
 I'm having issues with the NinjaTrader 8 client so I am going to look into the API access.
+
+10/25 - 10/27
+
+The API access required a license that was very expensive so I ended up not using it. The bot had an error that was connected to a different account so it didn't make any trades the past two days.
