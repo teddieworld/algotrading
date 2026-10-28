@@ -11,3 +11,4 @@ data/NQDATA.csv
 *.log
 *.log.*
 execution/logs/
+execution/runtime/

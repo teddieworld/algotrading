@@ -27,7 +27,7 @@ def executeTrade(position, marketOrder, stopLossOrder, takeProfitOrder, oco_Id):
         # Execute market order
         entry_result = client.Command(
             "PLACE",
-            "DEMO7641540",
+            "DEMO9688373",
             "MNQ DEC26",
             "BUY",
             contract_size,
@@ -50,7 +50,7 @@ def executeTrade(position, marketOrder, stopLossOrder, takeProfitOrder, oco_Id):
         # Execute SL
         sl_result = client.Command(
             "PLACE",
-            "DEMO7641540",
+            "DEMO9688373",
             "MNQ DEC26",
             "SELL",
             contract_size,
@@ -66,7 +66,7 @@ def executeTrade(position, marketOrder, stopLossOrder, takeProfitOrder, oco_Id):
         # Execute TP
         tp_result = client.Command(
             "PLACE",
-            "DEMO7641540",
+            "DEMO9688373",
             "MNQ DEC26",
             "SELL",
             contract_size,
@@ -90,7 +90,7 @@ def executeTrade(position, marketOrder, stopLossOrder, takeProfitOrder, oco_Id):
         # Execute market order
         entry_result = client.Command(
             "PLACE",
-            "DEMO7641540",
+            "DEMO9688373",
             "MNQ DEC26",
             "SELL",
             contract_size,
@@ -113,7 +113,7 @@ def executeTrade(position, marketOrder, stopLossOrder, takeProfitOrder, oco_Id):
         # Execute SL
         sl_result = client.Command(
             "PLACE",
-            "DEMO7641540",
+            "DEMO9688373",
             "MNQ DEC26",
             "BUY",
             contract_size,
@@ -129,7 +129,7 @@ def executeTrade(position, marketOrder, stopLossOrder, takeProfitOrder, oco_Id):
         # Execute TP
         tp_result = client.Command(
             "PLACE",
-            "DEMO7641540",
+            "DEMO9688373",
             "MNQ DEC26",
             "BUY",
             contract_size,
@@ -151,7 +151,7 @@ def liquidatePositions(position, stopLossOrder, takeProfitOrder):
     if position == "long":
         client.Command(
             "CANCEL",
-            "DEMO7641540",
+            "DEMO9688373",
             "MNQ DEC26",
             "",
             0,
@@ -166,7 +166,7 @@ def liquidatePositions(position, stopLossOrder, takeProfitOrder):
         )
         client.Command(
             "CANCEL",
-            "DEMO7641540",
+            "DEMO9688373",
             "MNQ DEC26",
             "",
             0,
@@ -181,7 +181,7 @@ def liquidatePositions(position, stopLossOrder, takeProfitOrder):
         )
         client.Command( #cancel the long order
             "PLACE",
-            "DEMO7641540",
+            "DEMO9688373",
             "MNQ DEC26",
             "SELL",
             contract_size,
@@ -202,7 +202,7 @@ def liquidatePositions(position, stopLossOrder, takeProfitOrder):
     elif position == "short":
         client.Command(
             "CANCEL",
-            "DEMO7641540",
+            "DEMO9688373",
             "MNQ DEC26",
             "",
             0,
@@ -217,7 +217,7 @@ def liquidatePositions(position, stopLossOrder, takeProfitOrder):
         )
         client.Command(
             "CANCEL",
-            "DEMO7641540",
+            "DEMO9688373",
             "MNQ DEC26",
             "",
             0,
@@ -232,7 +232,7 @@ def liquidatePositions(position, stopLossOrder, takeProfitOrder):
         )  
         client.Command( #cancel the short order
             "PLACE",
-            "DEMO7641540",
+            "DEMO9688373",
             "MNQ DEC26",
             "BUY",
             contract_size,
@@ -283,7 +283,7 @@ print("Subscribe result:", subscribeResult)
 time.sleep(2)
 
 # Strategy parameters
-TP_Ratio = 1.5
+TP_Ratio = 1
 contract_size = 1
 trade_open = False
 position = None
@@ -339,7 +339,7 @@ try:
             continue
 
         #if the time is ever greater than 1:00 PM, then everything is reset
-        if current_time.time() >= pd.to_datetime("11:55").time():
+        if current_time.time() >= pd.to_datetime("12:55").time():
             candles = pd.DataFrame(columns=["Date", "Open", "High", "Low", "Close", "Volume"])
             bar_start = None
             open_price = None
@@ -421,7 +421,7 @@ try:
                 (orbValuesSet == True)
                 and (trade_open == False)
                 and (ORB_Range < 150)
-                and (current_time.time() < pd.to_datetime("11:55").time())
+                and (current_time.time() < pd.to_datetime("10:30").time())
                 ): 
                 marketOrder = client.NewOrderId()
                 stopLossOrder = client.NewOrderId()
