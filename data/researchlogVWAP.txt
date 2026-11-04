@@ -1,0 +1,41 @@
+11/3
+
+    Trades: 1133
+    Win rate: 51.6%
+    Total points: 2754.50
+    Total % return: 220.36
+    Average points per trade: 2.43
+    Average stop size: 61.03 points
+
+    Basic orb VWAP mean reversion. Added a 10 point buffer to distinguish from a bounce or not.
+    Stop size is current *2 the low of the swing VWAP bounce and TP 1
+
+    -
+
+    Trades: 1540
+    Win rate: 49.4%
+    Total points: -771.50
+    Average points per trade: -0.50
+    Average stop size: 31.10 points
+
+    TP 1
+    SL 1
+    VWAP buffer 10
+    So the larger SL definitely provides a strong benefit
+
+    I'm going to start calculating total return as well. I will also implement costs and slippage this time
+    After costs and slippage my base regime:
+
+    Trades: 1133
+    Win rate: 51.6%
+    Total points: 2754.50
+    Total % return: 163.35
+    Average points per trade: 2.43
+    Average stop size: 61.03 points
+
+    9:30 to 12:00 EST
+    TP 1
+    SL 2
+    VWAP buffer 10
+
+    I want to try to outperform my ORB strategy which produced very strong results so it's not going to be an easy task.
