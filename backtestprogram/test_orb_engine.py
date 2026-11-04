@@ -56,6 +56,27 @@ class ExecutionTests(unittest.TestCase):
         self.assertEqual(len(late),1)
         self.assertEqual(late.iloc[0].Entry_time.time(),time(13,5))
 
+    def test_notebook_filter_controls(self):
+        data = bars([('09:45',105,113,104,112),('09:50',114,130,105,120),
+                     ('09:55',114,130,105,120),('10:00',120,121,119,120)])
+        data['Volume'] = 100
+        data['ATR'] = 5
+        baseline, _, _ = run_orb(data)
+        self.assertEqual(len(baseline),2)
+        limited, _, _ = run_orb(data,max_trades_per_day=1)
+        self.assertEqual(len(limited),1)
+        for options in [dict(excluded_months=(1,)), dict(allowed_weekdays=(0,)),
+                        dict(min_orb_range=10), dict(max_orb_range=10),
+                        dict(min_volume=100), dict(max_orb_atr_multiple=2),
+                        dict(allow_long=False), dict(breakout_buffer=20),
+                        dict(max_trades_per_day=0)]:
+            with self.subTest(options=options):
+                trades, _, _ = run_orb(data,**options)
+                self.assertTrue(trades.empty)
+        shifted, _, _ = run_orb(data,orb_start=time(9,35))
+        self.assertEqual(shifted.iloc[0].ORB_Range,8)
+        _, _, _ = run_orb(data,stop_range_multiple=0.5)
+
     def test_incomplete_opening_range_no_trades(self):
         data = bars([('09:45',105,113,104,112),('09:50',114,130,99,120),('09:55',120,121,119,120)])
         trades, _, _ = run_orb(data.drop(data.index[1]))
