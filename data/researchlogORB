@@ -1097,3 +1097,8 @@ No trade
 11/2
 $400.50
 
+11/25
+My bot hasn't traded in several weeks and I realized the ORB Range filter was the cause of that. I think because of how NQ has grown over time it is no longer going to realistically be smaller than 150 points on the ORB. I changed it to remove that filter and my bot took a trade today.
+
+-$301.00
+
