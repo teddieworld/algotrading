@@ -20,7 +20,6 @@ def executeTrade(position, marketOrder, stopLossOrder, takeProfitOrder, oco_Id):
     if position == "long":
         # Enter long
         entry_time = candles.iloc[-1]["Date"]
-        SL = ORB_Low
 
         # Create order IDS for each order type
 
@@ -46,7 +45,8 @@ def executeTrade(position, marketOrder, stopLossOrder, takeProfitOrder, oco_Id):
         # Once the loop ends are the order is filled, we set the entry_price and TP
         entry_price = client.AvgFillPrice(marketOrder)
         logging.info(f"{position} entry filled at {entry_price}")
-        TP = entry_price + ((entry_price - SL) * TP_Ratio)
+        SL = entry_price - 75
+        TP = entry_price + 56.25
         # Execute SL
         sl_result = client.Command(
             "PLACE",
@@ -83,7 +83,6 @@ def executeTrade(position, marketOrder, stopLossOrder, takeProfitOrder, oco_Id):
     elif position == "short":
         # Enter short
         entry_time = candles.iloc[-1]["Date"]
-        SL = ORB_High
 
         # Create order IDS for each order type
 
@@ -109,7 +108,8 @@ def executeTrade(position, marketOrder, stopLossOrder, takeProfitOrder, oco_Id):
         # Once the loop ends are the order is filled, we set the entry_price and TP
         entry_price = client.AvgFillPrice(marketOrder)
         logging.info(f"{position} entry filled at {entry_price}")
-        TP = entry_price - ((SL - entry_price) * TP_Ratio)
+        SL = entry_price + 75
+        TP = entry_price - 56.25
         # Execute SL
         sl_result = client.Command(
             "PLACE",
@@ -207,9 +207,9 @@ print("Subscribe result:", subscribeResult)
 time.sleep(2)
 
 # Strategy parameters
-TP_Ratio = 1
 contract_size = 1
 trade_open = False
+trades_taken = 0
 position = None
 stopLossOrder = None
 takeProfitOrder = None
@@ -270,6 +270,7 @@ try:
             high_price = None
             low_price = None
             trade_open = False
+            trades_taken = 0
             close_price = None
             candle_volume = None
             starting_volume = None
@@ -335,7 +336,7 @@ try:
             if (
                 (orbValuesSet == True)
                 and (trade_open == False)
-                and (ORB_Range < 150)
+                and (trades_taken < 2)
                 and (current_time.time() < pd.to_datetime("10:30").time())
                 ): 
                 marketOrder = client.NewOrderId()
@@ -346,11 +347,13 @@ try:
                     position = "long"
                     trade_open = executeTrade(position, marketOrder, stopLossOrder, takeProfitOrder, oco_Id)
                     print("Entered ", position)
+                    trades_taken += 1
                     logging.info(f"Entered {position}")
                 elif candles.iloc[-1]["Close"] < ORB_Low:
                     position = "short"
                     trade_open = executeTrade(position, marketOrder, stopLossOrder, takeProfitOrder, oco_Id)
                     print("Entered ", position)
+                    trades_taken += 1
                     logging.info(f"Entered {position}")
             bar_start = current5mperiod
             open_price = last
