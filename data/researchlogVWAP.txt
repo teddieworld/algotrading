@@ -39,3 +39,71 @@
     VWAP buffer 10
 
     I want to try to outperform my ORB strategy which produced very strong results so it's not going to be an easy task.
+
+11/5
+    Trades: 1064
+    Win rate: 43.3%
+    Total points: 5287.50
+    Total % return: 369.46
+    Average points per trade: 4.97
+    Average stop size: 60.87 points
+    TP 1.5
+    SL 2
+    VWAP buffer 10
+
+    The win rate is very low but the percent return is large
+
+    -
+
+    Trades: 943
+    Win rate: 51.0%
+    Total points: 3120.00
+    Total % return: 202.15
+    Average points per trade: 3.31
+    Average stop size: 90.41 points
+    TP 1
+    SL 3
+    VWAP buffer 10
+
+    -
+
+    Trades: 377
+    Win rate: 44.0%
+    Total points: 1991.25
+    Total % return: 140.33
+    Average points per trade: 5.28
+    Average stop size: 90.84 points
+    TP 1.5
+    SL 2
+    VWAP buffer 20
+
+    I'm happy with the TP 1.5 SL 2 VWAP 10 regime but I want to make it more consistent. The chart shows long stretches of decline for several months and
+    I want it to be a consistent uptrend for the 5 years.
+
+    I want to experiment with a filter of a rising/falling VWAP for a long/short entry
+
+    Trades: 950
+    Win rate: 42.5%
+    Total points: 3364.25
+    Total % return: 221.34
+    Maximum drawdown: 74.74%
+    Average points per trade: 3.54
+    Average stop size: 55.54 points
+
+    Results fall drastically. I will experiemnt with different TP and SL for this regime.
+
+    Trades: 1000
+    Win rate: 51.6%
+    Total points: 1863.50
+    Total % return: 98.76
+    Maximum drawdown: 90.95%
+    Average points per trade: 1.86
+    Average stop size: 55.62 points
+    TP 1
+    SL 2
+
+    Let me increase the lookback candles for our previous VWAP
+    No iteration of the rising/falling VWAP filter outperforms its absence
+
+    The ORB strategy does not have long periods where it loses money. Although the VWAP strategy has a higher overall return, the long periods of losing money
+    would not be viable as a strategy.
